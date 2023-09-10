@@ -1,0 +1,20 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DbConnection": "Server=SERVER_NAME;Initial Catalog=DATABASE_NAME;User ID=SQL_SERVER_USER_ID;Password=PASSWORD;encrypt=false;"
+  },
+  "JwtConfig": {
+      "AccessTokenKey": "key"
+  },
+  "CloudinaryConfig": {
+        "CloudName": "CLOUDINARY_CLOUD_NAME",
+        "ApiKey": "CLOUDINARY_API_KEY",
+        "ApiSecret": "CLOUDINARY_API_SECRET"
+  }
+}
