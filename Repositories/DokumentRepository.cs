@@ -8,7 +8,8 @@ namespace CloudStorage.Repositories
     {
         private readonly AppDbContext _context;
 
-        public DokumentRepository(AppDbContext context) {
+        public DokumentRepository(AppDbContext context)
+        {
             _context = context;
         }
 

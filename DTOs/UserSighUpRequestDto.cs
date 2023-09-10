@@ -2,7 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CloudStorage.DTOs
 {
-    public class UserSighUpRequestDto {
+    public class UserSighUpRequestDto
+    {
         [Required]
         public string FirstName { get; set; }
 

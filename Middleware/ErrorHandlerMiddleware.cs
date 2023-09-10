@@ -2,17 +2,23 @@ using System.Net;
 
 namespace CloudStorage.Middlewares
 {
-    public class ErrorHandlerMiddleware {
+    public class ErrorHandlerMiddleware
+    {
 
         RequestDelegate _next;
-        public ErrorHandlerMiddleware(RequestDelegate next) {
+        public ErrorHandlerMiddleware(RequestDelegate next)
+        {
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context) {
-            try {
+        public async Task Invoke(HttpContext context)
+        {
+            try
+            {
                 await _next(context);
-            } catch (Exception error) {
+            }
+            catch (Exception error)
+            {
                 var requestId = context.Request.Headers["X-Request-ID"];
                 Console.WriteLine($"Error: {error.Message}");
                 Console.WriteLine($"StackTrace: {error.StackTrace}");

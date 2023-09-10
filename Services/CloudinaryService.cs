@@ -7,9 +7,11 @@ using Microsoft.Extensions.Options;
 
 namespace CloudStorage.Services
 {
-    public class CloudinaryService : ICloudinaryService {
+    public class CloudinaryService : ICloudinaryService
+    {
         Cloudinary _cloudinary;
-        public CloudinaryService(IOptions<CloudinaryConfig> cloudinaryConfig) {
+        public CloudinaryService(IOptions<CloudinaryConfig> cloudinaryConfig)
+        {
             Account accound = new Account(
             cloudinaryConfig.Value.CloudName,
             cloudinaryConfig.Value.ApiKey,
@@ -18,30 +20,33 @@ namespace CloudStorage.Services
             _cloudinary = new Cloudinary(accound);
         }
 
-        public async Task<UploadCloudinaryFileRusult> UploadFile(IFormFile file) {
+        public async Task<UploadCloudinaryFileRusult> UploadFile(IFormFile file)
+        {
             Guid dokumentId = Guid.NewGuid();
             string dokumentName = file.Name;
 
-            using (var stream = file.OpenReadStream()){
-            try
+            using (var stream = file.OpenReadStream())
             {
-                var uploadParams = new RawUploadParams()
+                try
                 {
-                File = new FileDescription(dokumentName, stream),
-                PublicId=dokumentId.ToString(),
-                };
-                RawUploadResult  uploadResult = _cloudinary.Upload(uploadParams);
+                    var uploadParams = new RawUploadParams()
+                    {
+                        File = new FileDescription(dokumentName, stream),
+                        PublicId = dokumentId.ToString(),
+                    };
+                    RawUploadResult uploadResult = await _cloudinary.UploadAsync(uploadParams);
 
-                return new UploadCloudinaryFileRusult(){
-                    StatusCode = uploadResult.StatusCode,
-                    DokumentId = dokumentId,
-                    DokumentName = dokumentName,
-                };
-            }
-            catch (Exception error)
-            {
-                throw error;
-            }
+                    return new UploadCloudinaryFileRusult()
+                    {
+                        StatusCode = uploadResult.StatusCode,
+                        DokumentId = dokumentId,
+                        DokumentName = dokumentName,
+                    };
+                }
+                catch (Exception error)
+                {
+                    throw error;
+                }
             }
         }
 

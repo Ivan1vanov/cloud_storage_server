@@ -9,13 +9,13 @@ namespace CloudStorage.Repositories
     {
         private readonly AppDbContext _context;
 
-        public UserRepository(AppDbContext context) {
+        public UserRepository(AppDbContext context)
+        {
             _context = context;
         }
-        public async Task<User> GetUserById(string id)
+        public async Task<User?> GetUserById(string id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(user => user.Id == new Guid(id));
-            return user;
+            return await _context.Users.FirstOrDefaultAsync(user => user.Id == new Guid(id));
         }
 
         public async Task<User?> GetByEmailAddress(string email)
@@ -28,13 +28,13 @@ namespace CloudStorage.Repositories
             return await _context.Users.AnyAsync(user => user.Email == email);
         }
 
-        public async Task<User> CreateUser(User user) 
+        public async Task<User> CreateUser(User user)
         {
-             var some = await _context.Users.AddAsync(user);
+            var some = await _context.Users.AddAsync(user);
 
-             await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-             return some.Entity;
+            return some.Entity;
         }
     }
 }

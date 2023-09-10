@@ -1,6 +1,7 @@
 namespace CloudStorage.Models
 {
-    public class UploadDokumentResult {
+    public class UploadDokumentResult
+    {
         public bool Success { get; set; }
 
         public List<string> Errors { get; set; }

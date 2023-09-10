@@ -4,7 +4,8 @@ using System.Runtime.InteropServices;
 
 namespace CloudStorage.Entity
 {
-    public class Dokument {
+    public class Dokument
+    {
         [Key]
         public Guid Id { get; set; }
         public string? Description { get; set; }

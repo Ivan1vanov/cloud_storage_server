@@ -28,27 +28,30 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
 ));
 
 var jwtOptions = builder.Configuration
-	.GetSection("JwtConfig")
+    .GetSection("JwtConfig")
     .Get<JwtConfig>();
 
 builder.Services.Configure<CloudinaryConfig>(builder.Configuration.GetSection("CloudinaryConfig"));
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
 
-builder.Services.AddAuthentication(options => {
+builder.Services.AddAuthentication(options =>
+{
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
-}).AddJwtBearer(options => {
+}).AddJwtBearer(options =>
+{
     byte[] accessTokenKeyBytes = Encoding.UTF8.GetBytes(jwtOptions.AccessTokenKey);
 
     options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters{
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(accessTokenKeyBytes),
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = false,
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(accessTokenKeyBytes),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = false,
     };
 });
 
