@@ -7,7 +7,8 @@ using CloudStorage.Models;
 
 namespace CloudStorage.Services
 {
-    public class DokumentService : IDokumentService {
+    public class DokumentService : IDokumentService
+    {
 
         private ICloudinaryService _cloudinaryService;
         private IUserRespository _userRepository;
@@ -17,19 +18,33 @@ namespace CloudStorage.Services
             ICloudinaryService cloudinaryService,
             IUserRespository userRepository,
             IDokumentRepository dokumentRepository
-            ) {
+            )
+        {
             _cloudinaryService = cloudinaryService;
             _userRepository = userRepository;
             _dokumentRepository = dokumentRepository;
         }
 
-        public async Task<UploadDokumentResult> UploadDokument(UploadDokumentRequestDto data, TokenData jwtTokenData) {
+        public async Task<UploadDokumentResult> UploadDokument(UploadDokumentRequestDto data, TokenData jwtTokenData)
+        {
             var user = await _userRepository.GetUserById(jwtTokenData.UserId);
+
+            if (user == null)
+            {
+                return new UploadDokumentResult()
+                {
+                    Success = false,
+                    Errors = new List<string>(){
+                        "User does not exist."
+                    }
+                };
+            }
 
 
             var uploadResult = await _cloudinaryService.UploadFile(data.File);
 
-            if(uploadResult.StatusCode != HttpStatusCode.OK) {
+            if (uploadResult.StatusCode != HttpStatusCode.OK)
+            {
                 return new UploadDokumentResult()
                 {
                     Success = false,
@@ -53,7 +68,8 @@ namespace CloudStorage.Services
 
             await _dokumentRepository.CreateDokumnet(dokument);
 
-            return new UploadDokumentResult(){
+            return new UploadDokumentResult()
+            {
                 Success = true,
                 DokumentId = uploadResult.DokumentId,
             };

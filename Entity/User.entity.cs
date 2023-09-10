@@ -4,7 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace CloudStorage.Entity
 {
-    public class User {
+    public class User
+    {
         [Key]
         public Guid Id { get; set; }
 
