@@ -11,12 +11,12 @@ namespace CloudStorage.Services
     {
 
         private ICloudinaryService _cloudinaryService;
-        private IUserRespository _userRepository;
+        private IUserRepository _userRepository;
         private IDokumentRepository _dokumentRepository;
 
         public DokumentService(
             ICloudinaryService cloudinaryService,
-            IUserRespository userRepository,
+            IUserRepository userRepository,
             IDokumentRepository dokumentRepository
             )
         {

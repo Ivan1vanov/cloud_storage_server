@@ -1,3 +1,4 @@
+using CloudStorage.Constants;
 using CloudStorage.DTOs;
 using CloudStorage.Entity;
 using CloudStorage.Interfaces;
@@ -7,17 +8,19 @@ namespace CloudStorage.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IUserRespository _userRepository;
-
+        private readonly IUserRepository _userRepository;
         private readonly IJwtTokenService _jwtTokenService;
+        private readonly IBCryptHelpers _bcryptHelpers;
 
         public AuthService(
-            IUserRespository repository,
-            IJwtTokenService jwtTokenService
+            IUserRepository repository,
+            IJwtTokenService jwtTokenService,
+            IBCryptHelpers BCryptHelpers
             )
         {
             _userRepository = repository;
             _jwtTokenService = jwtTokenService;
+            _bcryptHelpers = BCryptHelpers;
         }
 
 
@@ -31,12 +34,12 @@ namespace CloudStorage.Services
                 {
                     Success = false,
                     Errors = new List<string>(){
-                    "User with provided email already exists"
+                    AuthServiceErrorMessages.UserWithProvidedEmailAlreadyExists
                 }
                 };
             }
 
-            string hashPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            string hashPassword = _bcryptHelpers.HashPassword(request.Password);
 
             var newUser = await _userRepository.CreateUser(new User()
             {
@@ -69,12 +72,12 @@ namespace CloudStorage.Services
                 {
                     Success = false,
                     Errors = new List<string>(){
-                    "User with provided email address does not exist"
+                    AuthServiceErrorMessages.NoUserFoundForProvidedEmail
                 },
                 };
             }
 
-            bool passwordVerified = BCrypt.Net.BCrypt.Verify(data.Password, user.Password);
+            bool passwordVerified = _bcryptHelpers.VerifyPassword(data.Password, user.Password);
 
             if (!passwordVerified)
             {
@@ -82,7 +85,7 @@ namespace CloudStorage.Services
                 {
                     Success = false,
                     Errors = new List<string>() {
-                    "Invalid credentials"
+                    AuthServiceErrorMessages.InvalidCredentials
                 }
                 };
             }

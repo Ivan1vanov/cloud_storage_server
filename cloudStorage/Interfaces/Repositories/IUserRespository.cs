@@ -2,7 +2,7 @@ using CloudStorage.Entity;
 
 namespace CloudStorage.Interfaces
 {
-    public interface IUserRespository
+    public interface IUserRepository
     {
         Task<User?> GetUserById(string id);
         Task<User?> GetByEmailAddress(string email);

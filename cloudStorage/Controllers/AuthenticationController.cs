@@ -35,7 +35,7 @@ namespace CloudStorage.Contorllers
         }
 
         [HttpPost("signIn")]
-        public async Task<ActionResult> SugnIn([FromBody] UserSignInRequestDto request)
+        public async Task<ActionResult> SignIn([FromBody] UserSignInRequestDto request)
         {
             if (!ModelState.IsValid)
             {

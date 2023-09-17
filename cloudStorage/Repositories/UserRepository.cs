@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloudStorage.Repositories
 {
-    public class UserRepository : IUserRespository
+    public class UserRepository : IUserRepository
     {
         private readonly AppDbContext _context;
 

@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using CloudStorage.Services;
 using CloudStorage.Middlewares;
+using CloudStorage.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,12 +16,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IUserRespository, UserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
 builder.Services.AddScoped<IDokumentService, DokumentService>();
 builder.Services.AddScoped<IDokumentRepository, DokumentRepository>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+builder.Services.AddScoped<IBCryptHelpers, BCryptHelpers>();
+
 
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
