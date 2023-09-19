@@ -2,15 +2,16 @@ using CloudStorage.Interfaces;
 
 namespace CloudStorage.Helpers
 {
-    public class BCryptHelpers : IBCryptHelpers {
-    public string HashPassword(string password)
+    public class BCryptHelpers : IBCryptHelpers
     {
-        return BCrypt.Net.BCrypt.HashPassword(password);
-    }
+        public string HashPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password);
+        }
 
-    public bool VerifyPassword(string password, string hashedPassword)
-    {
-        return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
-    }
+        public bool VerifyPassword(string password, string hashedPassword)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+        }
     }
 }

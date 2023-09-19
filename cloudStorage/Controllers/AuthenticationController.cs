@@ -1,5 +1,7 @@
 
+using CloudStorage.Constants;
 using CloudStorage.DTOs;
+using CloudStorage.Helpers;
 using CloudStorage.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,11 +28,12 @@ namespace CloudStorage.Contorllers
 
             var result = await _authService.SignUp(request);
 
-            if (result.Errors != null)
+            if (!result.Success)
             {
                 return Unauthorized(result);
             }
 
+            Response.Cookies.Append(CookieKeyNames.access_token, result.Token, CookieHelpers.GetAuthCookieOptions());
             return Ok(result);
         }
 
@@ -44,11 +47,12 @@ namespace CloudStorage.Contorllers
 
             var result = await _authService.SignIn(request);
 
-            if (result.Errors != null)
+            if (!result.Success)
             {
                 return Unauthorized(result);
             }
 
+            Response.Cookies.Append(CookieKeyNames.access_token, result.Token, CookieHelpers.GetAuthCookieOptions());
             return Ok(result);
         }
     }
