@@ -11,7 +11,7 @@ using Xunit;
 
 namespace CloudStorage.Tests.Services
 {
-    public class AuthServiceTests 
+    public class AuthServiceTests
     {
 
         private Mock<IUserRepository> _userRepositoryMock = new Mock<IUserRepository>();
@@ -34,8 +34,8 @@ namespace CloudStorage.Tests.Services
 
             var authService = new AuthService
             (
-                _userRepositoryMock.Object, 
-                _jwtTokenServiceMock.Object, 
+                _userRepositoryMock.Object,
+                _jwtTokenServiceMock.Object,
                 _bcryptHelpersMock.Object
             );
 
@@ -56,8 +56,8 @@ namespace CloudStorage.Tests.Services
 
             var authService = new AuthService
             (
-                _userRepositoryMock.Object, 
-                _jwtTokenServiceMock.Object, 
+                _userRepositoryMock.Object,
+                _jwtTokenServiceMock.Object,
                 _bcryptHelpersMock.Object
             );
 
@@ -83,8 +83,8 @@ namespace CloudStorage.Tests.Services
 
             var authService = new AuthService
             (
-                _userRepositoryMock.Object, 
-                _jwtTokenServiceMock.Object, 
+                _userRepositoryMock.Object,
+                _jwtTokenServiceMock.Object,
                 _bcryptHelpersMock.Object
             );
 
@@ -116,8 +116,8 @@ namespace CloudStorage.Tests.Services
 
             var authService = new AuthService
             (
-                _userRepositoryMock.Object, 
-                _jwtTokenServiceMock.Object, 
+                _userRepositoryMock.Object,
+                _jwtTokenServiceMock.Object,
                 _bcryptHelpersMock.Object
             );
 
@@ -138,8 +138,8 @@ namespace CloudStorage.Tests.Services
 
             var authService = new AuthService
             (
-                _userRepositoryMock.Object, 
-                _jwtTokenServiceMock.Object, 
+                _userRepositoryMock.Object,
+                _jwtTokenServiceMock.Object,
                 _bcryptHelpersMock.Object
             );
 

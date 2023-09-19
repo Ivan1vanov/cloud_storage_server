@@ -63,9 +63,6 @@ namespace CloudStorage.Services
                 AllowedUsers = new List<User>()
             };
 
-            Console.WriteLine("dokument: ");
-            Console.WriteLine(JsonSerializer.Serialize(dokument));
-
             await _dokumentRepository.CreateDokumnet(dokument);
 
             return new UploadDokumentResult()

@@ -30,23 +30,15 @@ namespace CloudStorage.Contorllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(
-                    new UploadDokumentResult()
-                    {
-                        Success = false,
-                        Errors = {
-                            "Invalid input data"
-                        }
-                    }
-                );
+                return BadRequest();
             }
 
-            string jwtToken = HttpHelpers.GetJwtTokenFromHeaders(HttpContext.Request.Headers);
+            string jwtToken = CookieHelpers.GetJwtTokenFromCookies(HttpContext.Request.Cookies);
             TokenData tokenData = _jwtTokenService.DecodeToken(jwtToken);
 
             var result = await _dokumentService.UploadDokument(request, tokenData);
 
-            if (result.Errors != null)
+            if (!result.Success)
             {
                 return BadRequest(result);
             }
