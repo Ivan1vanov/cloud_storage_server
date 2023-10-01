@@ -1,13 +1,13 @@
 using System;
 using CloudStorage.Constants;
-using CloudStorage.Helpers;
+using CloudStorage.Utils;
 using Microsoft.AspNetCore.Http;
 using Moq;
 using Xunit;
 
-namespace CloudStorage.Tests.Helpers
+namespace CloudStorage.Tests.Utils
 {
-    public class CookieHelpersTests
+    public class CookieUtilsTests
     {
 
         private Mock<IRequestCookieCollection> _cookieCollectionMock = new Mock<IRequestCookieCollection>();
@@ -20,7 +20,7 @@ namespace CloudStorage.Tests.Helpers
             _cookieCollectionMock.Setup(c => c[CookieKeyNames.access_token]).Returns(jwtTokenMock);
 
             // Act
-            var result = CookieHelpers.GetJwtTokenFromCookies(_cookieCollectionMock.Object);
+            var result = CookieUtils.GetJwtTokenFromCookies(_cookieCollectionMock.Object);
 
             // Assert
             Assert.Equal(jwtTokenMock, result);
@@ -33,8 +33,8 @@ namespace CloudStorage.Tests.Helpers
             _cookieCollectionMock.Setup(c => c[CookieKeyNames.access_token]).Returns((string)null);
 
             // Assert
-            var exeption = Assert.Throws<ApplicationException>(() => CookieHelpers.GetJwtTokenFromCookies(_cookieCollectionMock.Object));
-            Assert.Equal(CookieHelpersErrorMessages.canNotGetAccesTokenFromCookies, exeption.Message);
+            var exeption = Assert.Throws<ApplicationException>(() => CookieUtils.GetJwtTokenFromCookies(_cookieCollectionMock.Object));
+            Assert.Equal(CookieUtilsErrorMessages.canNotGetAccesTokenFromCookies, exeption.Message);
         }
     }
 }

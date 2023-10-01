@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CloudStorage.Contexts
 {
-    public class AppDbContext : DbContext
+    public class MsDatabaseContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> option) : base(option) { }
+        public MsDatabaseContext(DbContextOptions<MsDatabaseContext> option) : base(option) { }
 
         public DbSet<User> Users { get; set; }
 

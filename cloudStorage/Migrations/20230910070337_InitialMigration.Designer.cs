@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace cloud_storage.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(MsDatabaseContext))]
     [Migration("20230910070337_InitialMigration")]
     partial class InitialMigration
     {

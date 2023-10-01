@@ -6,9 +6,15 @@
     }
   },
   "AllowedHosts": "*",
-  "ConnectionStrings": {
-    "DbConnection": "Server=SERVER_NAME;Initial Catalog=DATABASE_NAME;User ID=SQL_SERVER_USER_ID;Password=PASSWORD;encrypt=false;"
-  },
+    "DatabaseSettings": {
+      "MysqlServer": {
+        "Server": "",
+        "Port": "",
+        "Database": "",
+        "User": "",
+        "Password": ""
+      }
+    },
   "JwtConfig": {
       "AccessTokenKey": "key"
   },
