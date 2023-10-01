@@ -1,14 +1,15 @@
 using CloudStorage.Constants;
 
-namespace CloudStorage.Helpers {
-    public static class CookieHelpers {
+namespace CloudStorage.Utils 
+{
+    public static class CookieUtils {
         public static string GetJwtTokenFromCookies(IRequestCookieCollection Cookies)
         {
             string jwtTokenCookie = Cookies[CookieKeyNames.access_token];
 
             if (jwtTokenCookie == null)
             {
-                throw new ApplicationException(CookieHelpersErrorMessages.canNotGetAccesTokenFromCookies);
+                throw new ApplicationException(CookieUtilsErrorMessages.canNotGetAccesTokenFromCookies);
             }
 
             return jwtTokenCookie;

@@ -7,9 +7,9 @@ namespace CloudStorage.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly AppDbContext _context;
+        private readonly MsDatabaseContext _context;
 
-        public UserRepository(AppDbContext context)
+        public UserRepository(MsDatabaseContext context)
         {
             _context = context;
         }

@@ -1,5 +1,4 @@
 using CloudStorage.DTOs;
-using CloudStorage.Helpers;
 using CloudStorage.Interfaces;
 using CloudStorage.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -33,7 +32,7 @@ namespace CloudStorage.Contorllers
                 return BadRequest();
             }
 
-            string jwtToken = CookieHelpers.GetJwtTokenFromCookies(HttpContext.Request.Cookies);
+            string jwtToken = Utils.CookieUtils.GetJwtTokenFromCookies(HttpContext.Request.Cookies);
             TokenData tokenData = _jwtTokenService.DecodeToken(jwtToken);
 
             var result = await _dokumentService.UploadDokument(request, tokenData);
