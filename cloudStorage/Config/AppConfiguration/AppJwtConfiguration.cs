@@ -1,13 +1,11 @@
 using System.Text;
 using CloudStorage.Constants;
-using CloudStorage.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace CloudStorage.Config
+namespace CloudStorage.Config.AppConfiguration
 {
     public class AppJwtConfiguration
     {

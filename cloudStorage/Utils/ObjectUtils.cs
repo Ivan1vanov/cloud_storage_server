@@ -2,9 +2,10 @@ using CloudStorage.Models;
 
 namespace CloudStorage.Utils
 {
-    public static class ObjectUtils {
+    public static class ObjectUtils
+    {
 
-        public static CheckForNullPropertiesResult CheckForNullProperties<T>(T obj) 
+        public static CheckForNullPropertiesResult CheckForNullProperties<T>(T obj)
         {
             var properteisWithNullValue = obj
             .GetType()
@@ -13,18 +14,19 @@ namespace CloudStorage.Utils
             .Select((property) => property.Name)
             .ToList();
 
-            if(properteisWithNullValue.Any())
+            if (properteisWithNullValue.Any())
             {
-                return new CheckForNullPropertiesResult(){
+                return new CheckForNullPropertiesResult()
+                {
                     HasNullProperties = true,
                     NullProperties = properteisWithNullValue,
                 };
             }
 
-            return new CheckForNullPropertiesResult(){
-                    HasNullProperties = false,
-                };
+            return new CheckForNullPropertiesResult()
+            {
+                HasNullProperties = false,
+            };
         }
-
     }
 }
