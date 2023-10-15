@@ -1,6 +1,6 @@
 namespace CloudStorage.Models
 {
-    public class MysqlServerDatabaseConnectionData 
+    public class MysqlServerDatabaseConnectionData
     {
         public string Server { get; set; }
         public string Port { get; set; }

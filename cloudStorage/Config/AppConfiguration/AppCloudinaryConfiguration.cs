@@ -1,4 +1,4 @@
-namespace CloudStorage.Config
+namespace CloudStorage.Config.AppConfiguration
 {
     public class AppCloudinaryConfiguration
     {

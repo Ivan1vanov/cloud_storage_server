@@ -16,11 +16,19 @@
       }
     },
   "JwtConfig": {
-      "AccessTokenKey": "key"
+    "AccessTokenKey": "key"
   },
   "CloudinaryConfig": {
-        "CloudName": "CLOUDINARY_CLOUD_NAME",
-        "ApiKey": "CLOUDINARY_API_KEY",
-        "ApiSecret": "CLOUDINARY_API_SECRET"
-  }
+    "CloudName": "CLOUDINARY_CLOUD_NAME",
+    "ApiKey": "CLOUDINARY_API_KEY",
+    "ApiSecret": "CLOUDINARY_API_SECRET"
+  },
+  "CorsePolicyConfigurations": {
+    "UsedPolicies": [ "Default" ],
+    "Policies": {
+      "Default": [
+        "http://localhost:4200"
+      ]
+    }
+    }
 }

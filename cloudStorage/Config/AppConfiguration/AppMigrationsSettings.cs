@@ -1,13 +1,14 @@
 using CloudStorage.Contexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace CloudStorage.Config
+namespace CloudStorage.Config.AppConfiguration
 {
-    public static class AppMigrationsSettings 
+    public static class AppMigrationsSettings
     {
-        public static void ApplyAppMigrations(IApplicationBuilder app) 
+        public static void ApplyAppMigrations(IApplicationBuilder app)
         {
-            using (var serviceScope = app.ApplicationServices.CreateScope()) {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
                 ApplyMigrationForContext(serviceScope.ServiceProvider.GetService<MsDatabaseContext>());
             }
         }

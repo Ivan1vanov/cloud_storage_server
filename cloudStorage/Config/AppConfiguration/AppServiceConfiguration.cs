@@ -3,7 +3,7 @@ using CloudStorage.Interfaces;
 using CloudStorage.Repositories;
 using CloudStorage.Services;
 
-namespace CloudStorage.Config
+namespace CloudStorage.Config.AppConfiguration
 {
     public class AppServiceConfiguration
     {

@@ -3,7 +3,7 @@ using CloudStorage.Models;
 using CloudStorage.Utils;
 using Microsoft.EntityFrameworkCore;
 
-namespace CloudStorage.Config
+namespace CloudStorage.Config.AppConfiguration
 {
     public class AppDatabaseConfiguration
     {
@@ -14,14 +14,14 @@ namespace CloudStorage.Config
             ));
         }
 
-        public static string GetMysqlServerConnectionString(ConfigurationManager  configuration)
+        public static string GetMysqlServerConnectionString(ConfigurationManager configuration)
         {
             var dbSettings = new MysqlServerDatabaseConnectionData();
             configuration.GetSection("DatabaseSettings:MysqlServer").Bind(dbSettings);
 
             var validationResult = ObjectUtils.CheckForNullProperties(dbSettings);
 
-            if(validationResult.HasNullProperties) 
+            if (validationResult.HasNullProperties)
             {
                 string missingproperties = string.Join(", ", validationResult.NullProperties);
                 throw new InvalidOperationException($"Missing following properties to connect to database: {missingproperties}");

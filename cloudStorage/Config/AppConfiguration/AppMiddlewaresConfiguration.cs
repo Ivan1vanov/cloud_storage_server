@@ -1,6 +1,6 @@
 using CloudStorage.Middlewares;
 
-namespace CloudStorage.Config
+namespace CloudStorage.Config.AppConfiguration
 {
     public class AppMiddlewaresConfiguration
     {
