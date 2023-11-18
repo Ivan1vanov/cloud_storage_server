@@ -2,8 +2,8 @@ using CloudStorage.Entity;
 
 namespace CloudStorage.Interfaces
 {
-    public interface IDokumentRepository
+    public interface IDocumentRepository
     {
-        Task<Dokument> CreateDokumnet(Dokument dokument);
+        Task<Document> CreateDocument(Document document);
     }
 }

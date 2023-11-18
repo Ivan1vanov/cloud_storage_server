@@ -24,7 +24,7 @@ namespace CloudStorage.Entity
         [JsonIgnore]
         public string Password { get; set; }
 
-        public List<Dokument> CreatedDokuments { get; set; }
-        public List<Dokument> AccessedDokuments { get; set; }
+        public List<Document> CreatedDocuments { get; set; }
+        public List<Document> AccessedDocuments { get; set; }
     }
 }

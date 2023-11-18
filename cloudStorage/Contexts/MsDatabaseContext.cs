@@ -9,19 +9,19 @@ namespace CloudStorage.Contexts
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Dokument> Dokuments { get; set; }
+        public DbSet<Document> Documents { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Dokument>()
-                .HasMany(dokument => dokument.AllowedUsers)
-                .WithMany(user => user.AccessedDokuments);
+            modelBuilder.Entity<Document>()
+                .HasMany(document => document.AllowedUsers)
+                .WithMany(user => user.AccessedDocuments);
 
-            modelBuilder.Entity<Dokument>()
-                .HasOne(dokument => dokument.Owner)
-                .WithMany(user => user.CreatedDokuments)
-                .HasForeignKey(dokument => dokument.OwnerId)
+            modelBuilder.Entity<Document>()
+                .HasOne(document => document.Owner)
+                .WithMany(user => user.CreatedDocuments)
+                .HasForeignKey(document => document.OwnerId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

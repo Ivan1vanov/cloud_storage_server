@@ -16,8 +16,8 @@ namespace CloudStorage.Config.AppConfiguration
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
-            builder.Services.AddScoped<IDokumentService, DokumentService>();
-            builder.Services.AddScoped<IDokumentRepository, DokumentRepository>();
+            builder.Services.AddScoped<IDocumentService, DocumentService>();
+            builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
             builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
             builder.Services.AddScoped<IBCryptHelpers, BCryptHelpers>();
         }

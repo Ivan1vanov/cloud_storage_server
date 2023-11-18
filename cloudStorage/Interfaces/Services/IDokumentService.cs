@@ -3,8 +3,8 @@ using CloudStorage.Models;
 
 namespace CloudStorage.Interfaces
 {
-    public interface IDokumentService
+    public interface IDocumentService
     {
-        public Task<UploadDokumentResult> UploadDokument(UploadDokumentRequestDto data, TokenData jwtTokenData);
+        public Task<UploadDocumentResult> UploadDocument(UploadDocumentRequestDto data, TokenData jwtTokenData);
     };
 }

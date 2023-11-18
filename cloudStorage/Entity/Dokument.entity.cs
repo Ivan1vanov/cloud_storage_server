@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CloudStorage.Entity
 {
-    public class Dokument
+    public class Document
     {
         [Key]
         public Guid Id { get; set; }

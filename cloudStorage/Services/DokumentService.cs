@@ -7,31 +7,31 @@ using CloudStorage.Models;
 
 namespace CloudStorage.Services
 {
-    public class DokumentService : IDokumentService
+    public class DocumentService : IDocumentService
     {
 
         private ICloudinaryService _cloudinaryService;
         private IUserRepository _userRepository;
-        private IDokumentRepository _dokumentRepository;
+        private IDocumentRepository _documentRepository;
 
-        public DokumentService(
+        public DocumentService(
             ICloudinaryService cloudinaryService,
             IUserRepository userRepository,
-            IDokumentRepository dokumentRepository
+            IDocumentRepository documentRepository
             )
         {
             _cloudinaryService = cloudinaryService;
             _userRepository = userRepository;
-            _dokumentRepository = dokumentRepository;
+            _documentRepository = documentRepository;
         }
 
-        public async Task<UploadDokumentResult> UploadDokument(UploadDokumentRequestDto data, TokenData jwtTokenData)
+        public async Task<UploadDocumentResult> UploadDocument(UploadDocumentRequestDto data, TokenData jwtTokenData)
         {
             var user = await _userRepository.GetUserById(jwtTokenData.UserId);
 
             if (user == null)
             {
-                return new UploadDokumentResult()
+                return new UploadDocumentResult()
                 {
                     Success = false,
                     Errors = new List<string>(){
@@ -45,7 +45,7 @@ namespace CloudStorage.Services
 
             if (uploadResult.StatusCode != HttpStatusCode.OK)
             {
-                return new UploadDokumentResult()
+                return new UploadDocumentResult()
                 {
                     Success = false,
                     Errors = {
@@ -54,21 +54,23 @@ namespace CloudStorage.Services
                 };
             }
 
-            var dokument = new Dokument()
+            var document = new Document()
             {
-                Id = uploadResult.DokumentId,
-                FileName = uploadResult.DokumentName,
+                Id = uploadResult.DocumentId,
+                FileName = uploadResult.DocumentName,
                 Description = data.Description,
                 Owner = user,
                 AllowedUsers = new List<User>()
             };
 
-            await _dokumentRepository.CreateDokumnet(dokument);
+            await _documentRepository.CreateDocument(document);
 
-            return new UploadDokumentResult()
+            return new UploadDocumentResult()
             {
                 Success = true,
-                DokumentId = uploadResult.DokumentId,
+                DocumentId = uploadResult.DocumentId,
+                DocumentExtension = uploadResult.DocumentExtension,
+                DocumentName = uploadResult.DocumentName
             };
         }
     }

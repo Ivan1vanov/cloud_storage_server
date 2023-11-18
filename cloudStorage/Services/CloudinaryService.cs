@@ -1,3 +1,4 @@
+using System.Text.Json;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using CloudStorage.Config;
@@ -22,8 +23,9 @@ namespace CloudStorage.Services
 
         public async Task<UploadCloudinaryFileRusult> UploadFile(IFormFile file)
         {
-            Guid dokumentId = Guid.NewGuid();
-            string dokumentName = file.Name;
+            Guid documentId = Guid.NewGuid();
+
+            string documentName = file.FileName;
 
             using (var stream = file.OpenReadStream())
             {
@@ -31,16 +33,17 @@ namespace CloudStorage.Services
                 {
                     var uploadParams = new RawUploadParams()
                     {
-                        File = new FileDescription(dokumentName, stream),
-                        PublicId = dokumentId.ToString(),
+                        File = new FileDescription(documentName, stream),
+                        PublicId = documentId.ToString(),
                     };
                     RawUploadResult uploadResult = await _cloudinary.UploadAsync(uploadParams);
 
                     return new UploadCloudinaryFileRusult()
                     {
                         StatusCode = uploadResult.StatusCode,
-                        DokumentId = dokumentId,
-                        DokumentName = dokumentName,
+                        DocumentId = documentId,
+                        DocumentName = documentName,
+                        DocumentExtension = file.FileName.Split('.').Last(),
                     };
                 }
                 catch (Exception error)
