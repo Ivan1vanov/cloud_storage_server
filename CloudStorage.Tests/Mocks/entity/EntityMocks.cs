@@ -13,8 +13,8 @@ namespace CloudStorage.Tests.Mocks
             LastName = "Test",
             Email = "user@test.com",
             Password = "123",
-            CreatedDokuments = new List<Dokument>(),
-            AccessedDokuments = new List<Dokument>(),
+            CreatedDocuments = new List<Document>(),
+            AccessedDocuments = new List<Document>(),
         };
     }
 }
