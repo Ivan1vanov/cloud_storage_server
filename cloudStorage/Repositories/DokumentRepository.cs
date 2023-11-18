@@ -4,21 +4,21 @@ using CloudStorage.Interfaces;
 
 namespace CloudStorage.Repositories
 {
-    public class DokumentRepository : IDokumentRepository
+    public class DocumentRepository : IDocumentRepository
     {
         private readonly MsDatabaseContext _context;
 
-        public DokumentRepository(MsDatabaseContext context)
+        public DocumentRepository(MsDatabaseContext context)
         {
             _context = context;
         }
 
-        public async Task<Dokument> CreateDokumnet(Dokument dokument)
+        public async Task<Document> CreateDocument(Document document)
         {
-            var newDokumentEntry = await _context.Dokuments.AddAsync(dokument);
+            var newDocumentEntry = await _context.Documents.AddAsync(document);
             await _context.SaveChangesAsync();
 
-            return newDokumentEntry.Entity;
+            return newDocumentEntry.Entity;
         }
     }
 }

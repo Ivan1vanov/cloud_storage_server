@@ -4,6 +4,7 @@ using CloudStorage.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace cloud_storage.Migrations
 {
     [DbContext(typeof(MsDatabaseContext))]
-    partial class MsDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231118093729_initialMigration")]
+    partial class initialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace cloud_storage.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CloudStorage.Entity.Dokument", b =>
+            modelBuilder.Entity("CloudStorage.Entity.Document", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +45,7 @@ namespace cloud_storage.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Dokuments");
+                    b.ToTable("Documents");
                 });
 
             modelBuilder.Entity("CloudStorage.Entity.User", b =>
@@ -74,25 +77,25 @@ namespace cloud_storage.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DokumentUser", b =>
+            modelBuilder.Entity("DocumentUser", b =>
                 {
-                    b.Property<Guid>("AccessedDokumentsId")
+                    b.Property<Guid>("AccessedDocumentsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("AllowedUsersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("AccessedDokumentsId", "AllowedUsersId");
+                    b.HasKey("AccessedDocumentsId", "AllowedUsersId");
 
                     b.HasIndex("AllowedUsersId");
 
-                    b.ToTable("DokumentUser");
+                    b.ToTable("DocumentUser");
                 });
 
-            modelBuilder.Entity("CloudStorage.Entity.Dokument", b =>
+            modelBuilder.Entity("CloudStorage.Entity.Document", b =>
                 {
                     b.HasOne("CloudStorage.Entity.User", "Owner")
-                        .WithMany("CreatedDokuments")
+                        .WithMany("CreatedDocuments")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -100,11 +103,11 @@ namespace cloud_storage.Migrations
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("DokumentUser", b =>
+            modelBuilder.Entity("DocumentUser", b =>
                 {
-                    b.HasOne("CloudStorage.Entity.Dokument", null)
+                    b.HasOne("CloudStorage.Entity.Document", null)
                         .WithMany()
-                        .HasForeignKey("AccessedDokumentsId")
+                        .HasForeignKey("AccessedDocumentsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -117,7 +120,7 @@ namespace cloud_storage.Migrations
 
             modelBuilder.Entity("CloudStorage.Entity.User", b =>
                 {
-                    b.Navigation("CreatedDokuments");
+                    b.Navigation("CreatedDocuments");
                 });
 #pragma warning restore 612, 618
         }

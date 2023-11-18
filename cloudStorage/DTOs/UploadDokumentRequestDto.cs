@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CloudStorage.DTOs
 {
-    public class UploadDokumentRequestDto
+    public class UploadDocumentRequestDto
     {
         public string? Description { get; set; }
 

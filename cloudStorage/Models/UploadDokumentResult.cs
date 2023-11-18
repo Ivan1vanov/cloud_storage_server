@@ -1,14 +1,14 @@
 namespace CloudStorage.Models
 {
-    public class UploadDokumentResult
+    public class UploadDocumentResult
     {
         public bool Success { get; set; }
 
         public List<string> Errors { get; set; }
-        public Guid DokumentId { get; set; }
+        public Guid DocumentId { get; set; }
 
-        public string DokumentName { get; set; }
+        public string DocumentName { get; set; }
 
-        public string DokumentExtention { get; set; }
+        public string DocumentExtension { get; set; }
     }
 }

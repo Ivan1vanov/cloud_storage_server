@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace cloud_storage.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class initialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,7 +27,7 @@ namespace cloud_storage.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Dokuments",
+                name: "Documents",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -37,32 +37,32 @@ namespace cloud_storage.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dokuments", x => x.Id);
+                    table.PrimaryKey("PK_Documents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Dokuments_Users_OwnerId",
+                        name: "FK_Documents_Users_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "Users",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "DokumentUser",
+                name: "DocumentUser",
                 columns: table => new
                 {
-                    AccessedDokumentsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AccessedDocumentsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AllowedUsersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DokumentUser", x => new { x.AccessedDokumentsId, x.AllowedUsersId });
+                    table.PrimaryKey("PK_DocumentUser", x => new { x.AccessedDocumentsId, x.AllowedUsersId });
                     table.ForeignKey(
-                        name: "FK_DokumentUser_Dokuments_AccessedDokumentsId",
-                        column: x => x.AccessedDokumentsId,
-                        principalTable: "Dokuments",
+                        name: "FK_DocumentUser_Documents_AccessedDocumentsId",
+                        column: x => x.AccessedDocumentsId,
+                        principalTable: "Documents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DokumentUser_Users_AllowedUsersId",
+                        name: "FK_DocumentUser_Users_AllowedUsersId",
                         column: x => x.AllowedUsersId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -70,13 +70,13 @@ namespace cloud_storage.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dokuments_OwnerId",
-                table: "Dokuments",
+                name: "IX_Documents_OwnerId",
+                table: "Documents",
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DokumentUser_AllowedUsersId",
-                table: "DokumentUser",
+                name: "IX_DocumentUser_AllowedUsersId",
+                table: "DocumentUser",
                 column: "AllowedUsersId");
         }
 
@@ -84,10 +84,10 @@ namespace cloud_storage.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DokumentUser");
+                name: "DocumentUser");
 
             migrationBuilder.DropTable(
-                name: "Dokuments");
+                name: "Documents");
 
             migrationBuilder.DropTable(
                 name: "Users");

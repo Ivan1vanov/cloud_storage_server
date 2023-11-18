@@ -9,23 +9,23 @@ namespace CloudStorage.Contorllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
-    [Route("dokument")]
-    public class DokumentController : ControllerBase
+    [Route("document")]
+    public class DocumentController : ControllerBase
     {
-        IDokumentService _dokumentService;
+        IDocumentService _documentService;
         IJwtTokenService _jwtTokenService;
 
-        public DokumentController(
-            IDokumentService dokumentService,
+        public DocumentController(
+            IDocumentService documentService,
             IJwtTokenService jwtTokenService
             )
         {
-            _dokumentService = dokumentService;
+            _documentService = documentService;
             _jwtTokenService = jwtTokenService;
         }
 
         [HttpPost("upload")]
-        public async Task<ActionResult<UploadDokumentResult>> UploadDokument([FromForm] UploadDokumentRequestDto request)
+        public async Task<ActionResult<UploadDocumentResult>> UploadDocument([FromForm] UploadDocumentRequestDto request)
         {
             if (!ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace CloudStorage.Contorllers
             string jwtToken = Utils.CookieUtils.GetJwtTokenFromCookies(HttpContext.Request.Cookies);
             TokenData tokenData = _jwtTokenService.DecodeToken(jwtToken);
 
-            var result = await _dokumentService.UploadDokument(request, tokenData);
+            var result = await _documentService.UploadDocument(request, tokenData);
 
             if (!result.Success)
             {
