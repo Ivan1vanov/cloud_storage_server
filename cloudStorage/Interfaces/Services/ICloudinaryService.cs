@@ -5,6 +5,6 @@ namespace CloudStorage.Interfaces
 {
     public interface ICloudinaryService
     {
-        public Task<UploadCloudinaryFileRusult> UploadFile(IFormFile file);
+        public Task<UploadCloudinaryFileResult> UploadFile(IFormFile file);
     }
 }

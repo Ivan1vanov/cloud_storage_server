@@ -1,4 +1,4 @@
-namespace CloudStorage.Constants
+namespace CloudStorage.Constants.ErrorMessages
 {
     public static class AuthServiceErrorMessages
     {
