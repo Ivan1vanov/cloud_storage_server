@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace cloud_storage.Migrations
 {
     [DbContext(typeof(MsDatabaseContext))]
-    [Migration("20231118093729_initialMigration")]
+    [Migration("20231118132654_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />
@@ -32,6 +32,10 @@ namespace cloud_storage.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileExtension")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FileName")

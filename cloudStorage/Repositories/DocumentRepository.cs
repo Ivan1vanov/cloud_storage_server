@@ -1,6 +1,7 @@
 using CloudStorage.Contexts;
 using CloudStorage.Entity;
 using CloudStorage.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CloudStorage.Repositories
 {
@@ -19,6 +20,14 @@ namespace CloudStorage.Repositories
             await _context.SaveChangesAsync();
 
             return newDocumentEntry.Entity;
+        }
+
+        public async Task<List<Document>> GetDocumentsByOwner(string ownerId)
+        {
+            return await _context.Documents
+            .Where(doc => doc.OwnerId == new Guid(ownerId))
+            .Include(d => d.AllowedUsers)
+            .ToListAsync();
         }
     }
 }

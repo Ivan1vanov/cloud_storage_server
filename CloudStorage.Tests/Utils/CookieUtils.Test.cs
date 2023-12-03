@@ -1,5 +1,3 @@
-using System;
-using CloudStorage.Constants;
 using CloudStorage.Utils;
 using Microsoft.AspNetCore.Http;
 using Moq;
@@ -13,28 +11,14 @@ namespace CloudStorage.Tests.Utils
         private Mock<IRequestCookieCollection> _cookieCollectionMock = new Mock<IRequestCookieCollection>();
 
         [Fact]
-        public void GetJwtTokenFromCookies_ValidToken_ReturnsToken()
-        {
-            // Arrange
-            var jwtTokenMock = "header.payload.signature";
-            _cookieCollectionMock.Setup(c => c[CookieKeyNames.access_token]).Returns(jwtTokenMock);
-
-            // Act
-            var result = CookieUtils.GetJwtTokenFromCookies(_cookieCollectionMock.Object);
-
-            // Assert
-            Assert.Equal(jwtTokenMock, result);
-        }
-
-        [Fact]
         public void GetJwtTokenFromCookies_MissingToken_ThrowsException()
         {
             // Arrange
-            _cookieCollectionMock.Setup(c => c[CookieKeyNames.access_token]).Returns((string)null);
+            var result = CookieUtils.GetAuthCookieOptions();
 
             // Assert
-            var exeption = Assert.Throws<ApplicationException>(() => CookieUtils.GetJwtTokenFromCookies(_cookieCollectionMock.Object));
-            Assert.Equal(CookieUtilsErrorMessages.canNotGetAccesTokenFromCookies, exeption.Message);
+            Assert.False(result.HttpOnly);
+            Assert.Equal(SameSiteMode.Strict, result.SameSite);
         }
     }
 }

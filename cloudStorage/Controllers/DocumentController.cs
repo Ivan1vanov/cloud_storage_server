@@ -1,6 +1,9 @@
+using System.Text.Json;
+using CloudStorage.Constants;
 using CloudStorage.DTOs;
 using CloudStorage.Interfaces;
 using CloudStorage.Models;
+using CloudStorage.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,8 +35,8 @@ namespace CloudStorage.Contorllers
                 return BadRequest();
             }
 
-            string jwtToken = Utils.CookieUtils.GetJwtTokenFromCookies(HttpContext.Request.Cookies);
-            TokenData tokenData = _jwtTokenService.DecodeToken(jwtToken);
+            string jwtTokenFromCookie = HttpContext.Request.Cookies[CookieKeyNames.access_token];
+            TokenData tokenData = _jwtTokenService.DecodeToken(jwtTokenFromCookie);
 
             var result = await _documentService.UploadDocument(request, tokenData);
 
@@ -43,6 +46,17 @@ namespace CloudStorage.Contorllers
             }
 
             return Ok(result);
+        }
+
+        [HttpGet()]
+        public async Task<ActionResult> GetAllDocumentsByOwnerId()
+        {
+            string jwtTokenFromCookie = HttpContext.Request.Cookies[CookieKeyNames.access_token];
+            TokenData tokenData = _jwtTokenService.DecodeToken(jwtTokenFromCookie);
+
+            var documents = await _documentService.GetAllDocumentsByOwnerId(tokenData.UserId);
+
+            return Ok(documents);
         }
     }
 }

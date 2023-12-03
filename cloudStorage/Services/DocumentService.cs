@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text.Json;
+using CloudStorage.Constants.ErrorMessages;
 using CloudStorage.DTOs;
 using CloudStorage.Entity;
 using CloudStorage.Interfaces;
@@ -35,7 +36,7 @@ namespace CloudStorage.Services
                 {
                     Success = false,
                     Errors = new List<string>(){
-                        "User does not exist."
+                        UploadDocumentErrorMessages.UserDoesNotExist
                     }
                 };
             }
@@ -49,7 +50,7 @@ namespace CloudStorage.Services
                 {
                     Success = false,
                     Errors = {
-                        "Unexpected error during file uploading"
+                        UploadDocumentErrorMessages.UnexpectedError
                     }
                 };
             }
@@ -58,6 +59,7 @@ namespace CloudStorage.Services
             {
                 Id = uploadResult.DocumentId,
                 FileName = uploadResult.DocumentName,
+                FileExtension = uploadResult.DocumentExtension,
                 Description = data.Description,
                 Owner = user,
                 AllowedUsers = new List<User>()
@@ -72,6 +74,13 @@ namespace CloudStorage.Services
                 DocumentExtension = uploadResult.DocumentExtension,
                 DocumentName = uploadResult.DocumentName
             };
+        }
+
+        public async Task<List<Document>> GetAllDocumentsByOwnerId(string ownerId)
+        {
+            var documents = await _documentRepository.GetDocumentsByOwner(ownerId);
+
+            return documents;
         }
     }
 }

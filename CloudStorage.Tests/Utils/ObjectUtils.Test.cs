@@ -4,12 +4,14 @@ using Xunit;
 
 namespace CloudStorage.Tests.Utils
 {
-    public class ObjectUtilsTests {
+    public class ObjectUtilsTests
+    {
         [Fact]
-        public void CheckForNullProperties_InputHasNullPreparties_ReturnBooleanAndNullPropertieNames() 
+        public void CheckForNullProperties_InputHasNullPreparties_ReturnBooleanAndNullPropertieNames()
         {
             // Arrange
-            var inputMock = new{
+            var inputMock = new
+            {
                 name = "test",
                 surname = (string?)null,
                 email = (string?)null,
@@ -20,14 +22,15 @@ namespace CloudStorage.Tests.Utils
 
             // Assert
             Assert.True(result.HasNullProperties);
-            Assert.Equal(new List<string>{ "surname", "email" }, result.NullProperties);
+            Assert.Equal(new List<string> { "surname", "email" }, result.NullProperties);
         }
 
         [Fact]
         public void CheckForNullProperties_InputDoesNotHaveNullProperties_ReturnBoolan()
         {
             // Arrange
-            var inputMock = new{
+            var inputMock = new
+            {
                 name = "test",
                 surname = "test-surname",
                 email = "test-email",

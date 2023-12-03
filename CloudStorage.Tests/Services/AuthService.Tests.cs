@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CloudStorage.Constants;
+using CloudStorage.Constants.ErrorMessages;
 using CloudStorage.Entity;
 using CloudStorage.Interfaces;
 using CloudStorage.Models;
@@ -24,7 +24,7 @@ namespace CloudStorage.Tests.Services
         {
             // Arrange
             _userRepositoryMock.Setup(repo => repo.GetByEmailAddress(It.IsAny<string>()))
-                .ReturnsAsync(EntityMocks.UserEntity);
+                .ReturnsAsync(EntityMocks.User);
 
             _bcryptHelpersMock.Setup(bcrypt => bcrypt.VerifyPassword(It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
@@ -76,7 +76,7 @@ namespace CloudStorage.Tests.Services
         {
             // Arrange
             _userRepositoryMock.Setup(repo => repo.GetByEmailAddress(It.IsAny<string>()))
-                .ReturnsAsync(EntityMocks.UserEntity);
+                .ReturnsAsync(EntityMocks.User);
 
             _bcryptHelpersMock.Setup(bcrypt => bcrypt.VerifyPassword(It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(false);
@@ -106,10 +106,10 @@ namespace CloudStorage.Tests.Services
                 .ReturnsAsync(false);
 
             _bcryptHelpersMock.Setup(bcrypt => bcrypt.HashPassword(It.IsAny<string>()))
-                .Returns(EntityMocks.UserEntity.Password);
+                .Returns(EntityMocks.User.Password);
 
             _userRepositoryMock.Setup(repo => repo.CreateUser(It.IsAny<User>()))
-                .ReturnsAsync(EntityMocks.UserEntity);
+                .ReturnsAsync(EntityMocks.User);
 
             _jwtTokenServiceMock.Setup(jwt => jwt.GenerateAccessToken(It.IsAny<GenerateJwtTokenPayload>()))
                 .Returns(AuthResultMocks.AuthSuccessResultMock.Token);

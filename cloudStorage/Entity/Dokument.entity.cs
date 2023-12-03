@@ -13,6 +13,9 @@ namespace CloudStorage.Entity
         public string FileName { get; set; }
 
         [Required]
+        public string FileExtension { get; set; }
+
+        [Required]
         public User Owner { get; set; }
 
         [Required]

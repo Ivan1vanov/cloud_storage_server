@@ -21,11 +21,12 @@ namespace CloudStorage.Services
             _cloudinary = new Cloudinary(accound);
         }
 
-        public async Task<UploadCloudinaryFileRusult> UploadFile(IFormFile file)
+        public async Task<UploadCloudinaryFileResult> UploadFile(IFormFile file)
         {
             Guid documentId = Guid.NewGuid();
 
-            string documentName = file.FileName;
+            string documentName = Path.GetFileNameWithoutExtension(file.FileName);
+            string documentExtension = Path.GetExtension(file.FileName).Split(".").Last();
 
             using (var stream = file.OpenReadStream())
             {
@@ -38,12 +39,12 @@ namespace CloudStorage.Services
                     };
                     RawUploadResult uploadResult = await _cloudinary.UploadAsync(uploadParams);
 
-                    return new UploadCloudinaryFileRusult()
+                    return new UploadCloudinaryFileResult()
                     {
                         StatusCode = uploadResult.StatusCode,
                         DocumentId = documentId,
                         DocumentName = documentName,
-                        DocumentExtension = file.FileName.Split('.').Last(),
+                        DocumentExtension = documentExtension,
                     };
                 }
                 catch (Exception error)
